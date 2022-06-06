@@ -1,48 +1,69 @@
-import react from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, View, Alert, StatusBar } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient, Feather } from 'expo-linear-gradient';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { LinearGradient} from 'expo-linear-gradient';
 
 const weatherOptions={
     Rain:{
-        iconName: 'rainy-sharp',
+        iconName: 'weather-rainy',
+        gradient: ['#C4D3DF', '#DFD0C4'],
+        title:'Дождь',
     },
     Snow:{
-        iconName: 'cloud-snow',
+        iconName: 'weather-snowy-heavy',
+        gradient: ['#F3F6FB', '#AAACB0'],
+        title:'Снег',
     },
     Thunderstorm:{
-        iconName: 'rainy-sharp',
+        iconName: 'weather-lightning',
+        gradient: ['#001C3D', '#35383A'],
+        title:'Гроза',
     },
     Drizzle:{
-        iconName: 'rainy-sharp',
+        iconName: 'weather-partly-rainy',
+        gradient: ['#001C3D', '#243B55'],
+        title:'Морось',
     },
     Dust:{
-        iconName: 'rainy-sharp',
+        iconName: 'weather-windy',
+        gradient: ['#A89687', '#8799A8'],
+        title:'Пыльно',
     },
     Smoke:{
-        iconName: 'rainy-sharp',
+        iconName: 'smog',
+        gradient: ['#75766C', '#6D6C76'],
+        title:'Дымно',
     },
     Haze:{
-        iconName: 'rainy-sharp',
+        iconName: 'weather-hazy',
+        gradient: ['#BBB8B4', '#252524'],
+        title:'Легкий туман',
     },
     Mist:{
-        iconName: 'rainy-sharp',
+        iconName: 'weather-fog',
+        gradient: ['#CACFD0', '#D8C9A3'],
+        title:'Туман',
     },
     Clear:{
-        iconName: 'rainy-sharp',
+        iconName: 'weather-sunny',
+        gradient: ['#FFF380', '#808CFF'],
+        title:'Солнечно',
     },
     Clouds:{
-        iconName: 'rainy-sharp',
+        iconName: 'weather-cloudy',
+        gradient: ['#FAD6A5', '#A5C9FA'],
+        title:'Облачно',
     }
 }
 
 export default function Weather({temp,condition}){
     return (
-        <LinearGradient colors={['#746353','#963785','#895743']} style={styles.container}>
+        <LinearGradient colors={weatherOptions[condition].gradient} style={styles.container}>
                 <StatusBar barStyle="light-content" />
                 <View style={styles.halfContainer}>
-                    <Ionicons name={weatherOptions[condition].iconName} size={65} color="black" />
+                    <MaterialCommunityIcons name={weatherOptions[condition].iconName} size={65} color="white" />
+                    <Text style={styles.title}>{weatherOptions[condition].title}</Text>
                     <Text style={styles.text}>{temp} С°</Text> 
                 </View>
 
@@ -68,5 +89,13 @@ const styles=StyleSheet.create({
     },
     text:{
         fontSize:30,
+        color: "white",
+    },
+    title:{
+        color: "white",
+        fontSize: 44,
+        fontWeight:"320",
+        marginBottom: 10,
+        textAlign: "center"
     }
 })
